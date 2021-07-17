@@ -8,6 +8,7 @@ use App\Http\Requests\StoreCompany;
 use App\Http\Requests\UpdateCompany;
 use App\Http\Requests\StoreEmployee;
 use App\Http\Requests\UpdateEmployee;
+use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
 {
@@ -38,17 +39,24 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // if ($request->file('imgUpload1') == null) {
+    //     $file = "";
+    // }else{
+    //    $file = $request->file('imgUpload1')->store('images');  
+    // }
     public function store(StoreCompany $request, Company $company)
     {
-        // $storagePath = Storage::disk('public')->put('logos', $request->logo);
+        $storagePath = Storage::disk('public')->put('logos', $request->logo);
 
-    //     $storageName = basename($storagePath);
-        $image = $request->image->store('company');
+        $storageName = basename($storagePath);
+        // $image = $request->image->store('company');
+
+        
 
         $validatedData = [
             'name' => $request->name,
             'email' => $request->email,
-            'logo' => $image,
+            'logo' => $storageName,
             'website' => $request->website
         ];
 
@@ -68,6 +76,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
+        
         // return view('companies.show')->with('company', $company);
         return view('companies.show', compact('company'));
     }

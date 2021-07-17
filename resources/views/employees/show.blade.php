@@ -10,7 +10,6 @@
                     <ul class="list-group">
                         <li class="list-group-item">First Name: {{ $employee->first_name }}</li>
                         <li class="list-group-item">Last Name: {{ $employee->last_name }}</li>
-                        <li class="list-group-item">Company: {{ $employee->company->name }}</li>
                         <li class="list-group-item">Email: {{ $employee->email }}</li>
                         <li class="list-group-item">Phone: {{ $employee->phone }}</li>
                     </ul>

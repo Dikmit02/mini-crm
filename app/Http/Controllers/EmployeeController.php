@@ -17,7 +17,7 @@ class EmployeeController extends Controller
     public function index()
     {
         return view('employees.index')->with('employees', Employee::all());
-        // return view('employees.index');
+        
     }
 
     /**
@@ -39,7 +39,6 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployee $request, Employee $employee)
     {
-        $employee->create($request->validated());
 
         return redirect()->route('employees.index')
             ->with('success', 'Employee successfully created!');
