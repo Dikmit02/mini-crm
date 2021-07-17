@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Employee;
 use App\Models\Company;
 use App\Http\Requests\StoreEmployee;
@@ -17,7 +18,6 @@ class EmployeeController extends Controller
     public function index()
     {
         return view('employees.index')->with('employees', Employee::all());
-        
     }
 
     /**
@@ -39,10 +39,16 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployee $request, Employee $employee)
     {
+        Employee::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'company_id' => $request->company_id,
+            'email' => $request->email,
+            'phone' => $request->phone
+        ]);
 
         return redirect()->route('employees.index')
             ->with('success', 'Employee successfully created!');
-   
     }
 
     /**
@@ -66,7 +72,6 @@ class EmployeeController extends Controller
     {
         $companies = $company->all()->sortBy('name');
         return view('employees.edit', compact('employee', 'companies'));
-  
     }
 
     /**
@@ -82,7 +87,6 @@ class EmployeeController extends Controller
 
         return redirect()->route('employees.index')
             ->with('success', 'Employee successfully updated!');
-  
     }
 
     /**
@@ -97,6 +101,5 @@ class EmployeeController extends Controller
 
         return redirect()->route('employees.index')
             ->with('success', 'Employee successfully deleted!');
- 
     }
 }

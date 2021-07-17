@@ -19,7 +19,7 @@ class CreateEmployeesTable extends Migration
             $table->string('last_name', 100);
             $table->foreignId('company_id')->constrained()->onDelete('cascade');
             $table->string('email')->unique();
-            $table->string('phone')->nullable();;
+            $table->string('phone')->nullable();
             $table->timestamps();
         });
     }
