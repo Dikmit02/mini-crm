@@ -8,7 +8,8 @@
                 <div class="card-header">Company Details</div>
                 <div class="card-body">
                     <ul class="list-group">
-                        <li class="list-group-item">Logo: <img alt="" class="img-fluid" src="{{ $company->logo_url }}" /></li>
+                        <li class="list-group-item">Logo: <img alt="" class="img-fluid" src="{{ asset('storage/logos/'.$company->logo) }}" /></li>
+                        <li class="list-group-item">Name: {{ asset('storage/logos/'.$company->logo) }}"</li>
                         <li class="list-group-item">Name: {{ $company->name }}</li>
                         <li class="list-group-item">Email: {{ $company->email }}</li>
                         <li class="list-group-item">Website: {{ $company->website }}</li>

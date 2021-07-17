@@ -49,10 +49,6 @@ class CompanyController extends Controller
         $storagePath = Storage::disk('public')->put('logos', $request->logo);
 
         $storageName = basename($storagePath);
-        // $image = $request->image->store('company');
-
-        
-
         $validatedData = [
             'name' => $request->name,
             'email' => $request->email,
@@ -103,16 +99,14 @@ class CompanyController extends Controller
      */
     public function update(UpdateCompany $request, Company $company)
     {
-        // $storagePath = Storage::disk('public')->put('logos', $request->logo);
+        $storagePath = Storage::disk('public')->put('logos', $request->logo);
 
-        //     $storageName = basename($storagePath);
-
-        $image = $request->image->store('company');
+        $storageName = basename($storagePath);
 
         $validatedData = [
             'name' => $request->name,
             'email' => $request->email,
-            'logo' => $image,
+            'logo' => $storageName,
             'website' => $request->website
         ];
 
