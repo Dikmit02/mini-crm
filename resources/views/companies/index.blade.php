@@ -16,19 +16,6 @@
                 </div>
                 <div class="card-body">
                     <div>
-                        <div class="row mb-4">
-                            <div class="col-md-8 form-inline">
-                                Per Page: &nbsp;
-                                <select wire:model="perPage" class="form-control">
-                                    <option>10</option>
-                                    <option>15</option>
-                                    <option>25</option>
-                                </select>
-                            </div>
-
-                           
-                        </div>
-
                         <table class="table">
                             <thead>
                                 <tr>
@@ -48,11 +35,11 @@
                                     <td>{{ $company->employees_count }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <a class="btn btn-primary mr-1 " href="{{ route('companies.edit', $company->id) }}">Edit</a>
+                                            <a class="btn btn-primary me-3 " href="{{ route('companies.edit', $company->id) }}">Edit</a>
                                             <form action="{{ route('companies.destroy', $company->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="submit" class="btn btn-danger me-3">Delete</button>
                                             </form>
                                         </div>
                                     </td>
@@ -60,7 +47,9 @@
                                 @endforeach
                             </tbody>
                         </table>
-
+                        @if($companies && count($companies))
+                        {{ $companies->links() }}
+                        @endif
                        
                     </div>
                 </div>

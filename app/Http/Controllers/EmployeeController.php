@@ -17,7 +17,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return view('employees.index')->with('employees', Employee::all());
+        return view('employees.index')->with('employees', Employee::simplePaginate(10));
     }
 
     /**

@@ -16,26 +16,14 @@
                 </div>
                 <div class="card-body">
                     <div>
-                        <div class="row mb-4">
-                            <div class="col-md-8 form-inline">
-                                Per Page: &nbsp;
-                                <select wire:model="perPage" class="form-control">
-                                    <option>10</option>
-                                    <option>15</option>
-                                    <option>25</option>
-                                </select>
-                            </div>
-
-                            
-                        </div>
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th >Name</th>
-                                    <th >Company</th>
-                                    <th >Email</th>
-                                    <th >Phone</th>
-                                    <th >Action</th>
+                                    <th>Name</th>
+                                    <th>Company</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,11 +35,11 @@
                                     <td>{{ $employee->phone }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <a class="btn btn-primary mr-1" href="{{ route('employees.edit', $employee->id) }}">Edit</a>
+                                            <a class="btn btn-primary me-3" href="{{ route('employees.edit', $employee->id) }}">Edit</a>
                                             <form action="{{ route('employees.destroy', $employee->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="submit" class="btn btn-danger me-3">Delete</button>
                                             </form>
                                         </div>
                                     </td>
@@ -59,7 +47,9 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        
+                        @if($employees && count($employees))
+                        {{ $employees->links() }}
+                        @endif
                     </div>
                 </div>
             </div>
