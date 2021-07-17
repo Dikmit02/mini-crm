@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCompany;
+use App\Http\Requests\UpdateCompany;
+use App\Http\Requests\StoreEmployee;
+use App\Http\Requests\UpdateEmployee;
 
 class CompanyController extends Controller
 {
@@ -13,7 +18,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        return view('companies.index')->with('companies', Company::all());
+        // return view('companies.index');
     }
 
     /**
@@ -23,7 +29,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('companies.create');
     }
 
     /**
@@ -32,9 +38,26 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCompany $request, Company $company)
     {
-        //
+        // $storagePath = Storage::disk('public')->put('logos', $request->logo);
+
+    //     $storageName = basename($storagePath);
+        $image = $request->image->store('company');
+
+        $validatedData = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'logo' => $image,
+            'website' => $request->website
+        ];
+
+        $company->create($validatedData);
+
+        return redirect()->route('companies.index')
+                ->with('success', 'Company successfully created!');
+
+
     }
 
     /**
@@ -43,10 +66,12 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Company $company)
     {
-        //
+        // return view('companies.show')->with('company', $company);
+        return view('companies.show', compact('company'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -54,9 +79,10 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Company $company)
     {
-        //
+        // return view('companies.edit')->with('company', $company);
+        return view('companies.edit', compact('company'));
     }
 
     /**
@@ -66,9 +92,25 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCompany $request, Company $company)
     {
-        //
+        // $storagePath = Storage::disk('public')->put('logos', $request->logo);
+
+        //     $storageName = basename($storagePath);
+
+        $image = $request->image->store('company');
+
+        $validatedData = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'logo' => $image,
+            'website' => $request->website
+        ];
+
+        $company->update($validatedData);
+
+        return redirect()->route('companies.index')
+            ->with('success', 'Company successfully updated!');
     }
 
     /**
@@ -77,8 +119,11 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Company $company)
     {
-        //
+        $company->delete();
+
+        return redirect()->route('companies.index')
+            ->with('success', 'Company successfully deleted!');
     }
 }

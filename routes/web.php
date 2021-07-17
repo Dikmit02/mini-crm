@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
+
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\CompanyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +27,6 @@ Auth::routes();
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
 Route::resources([
-    'companies' => 'CompanyController',
-    'employees' => 'EmployeeController'
+    'companies' => CompanyController::class,
+    'employees' => EmployeeController::class
 ]);

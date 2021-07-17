@@ -11,8 +11,8 @@
             @endif
             <div class="card">
                 <div class="card-header d-flex d-flex-wrap justify-content-between align-items-center">
-                    <h3>Employees</h3>
-                    <a class="btn btn-primary pull-right" href="{{ route('employees.create') }}"> Create Employee</a>
+                    <h3>Companies</h3>
+                    <a class="btn btn-primary pull-right" href="{{ route('companies.create') }}"> Create Company</a>
                 </div>
                 <div class="card-body">
                     
